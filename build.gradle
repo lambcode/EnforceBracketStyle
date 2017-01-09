@@ -1,0 +1,45 @@
+buildscript {
+  repositories {
+    mavenCentral()
+    maven {
+      url "https://oss.sonatype.org/content/repositories/snapshots/"
+    }
+    maven {
+      url 'http://dl.bintray.com/jetbrains/intellij-plugin-service'
+    }
+  }
+  dependencies {
+    classpath "org.jetbrains.intellij.plugins:gradle-intellij-plugin:0.2.0-SNAPSHOT"
+  }
+}
+
+apply plugin: 'org.jetbrains.intellij'
+apply plugin: 'java'
+
+sourceCompatibility = javaVersion
+targetCompatibility = javaVersion
+
+tasks.withType(JavaCompile) { options.encoding = 'UTF-8' }
+
+sourceSets {
+  main {
+    java.srcDir 'src'
+    resources.srcDir 'resources'
+  }
+  test {
+    java.srcDir 'test'
+  }
+}
+
+intellij {
+  version ideaVersion
+  pluginName 'EnforceBracketStyle'
+  updateSinceUntilBuild false
+  downloadSources Boolean.valueOf(downloadIdeaSources)
+
+  publish {
+      channels publishChannels.split(',')
+      username publishUsername
+      password publishPassword
+  }
+}
