@@ -9,7 +9,7 @@ import javax.swing.text.Caret;
 public class CustomEnterActionHandler {
 
     public boolean shouldFormatBracket(CharSequence charSequence, int currentOffset) {
-        return characterToLeftIsOpenBracket(charSequence, currentOffset) && firstNonWhitespaceCharacterOnLine(charSequence, currentOffset);
+        return characterToLeftIsOpenBracket(charSequence, currentOffset) && notFirstNonWhitespaceCharacterOnLine(charSequence, currentOffset);
     }
 
     private boolean characterToLeftIsOpenBracket(CharSequence charSequence, int currentOffset) {
@@ -19,7 +19,7 @@ public class CustomEnterActionHandler {
         return charSequence.charAt(currentOffset - 1) == '{';
     }
 
-    private boolean firstNonWhitespaceCharacterOnLine(CharSequence charSequence, int currentOffset) {
+    private boolean notFirstNonWhitespaceCharacterOnLine(CharSequence charSequence, int currentOffset) {
         boolean encounteredNonWhiteSpace = false;
         boolean encounteredNewline = false;
         currentOffset -= 2; //skip current & prior character ( the '{' bracket )
@@ -38,7 +38,7 @@ public class CustomEnterActionHandler {
 
             currentOffset--;
         }
-        return !encounteredNonWhiteSpace;
+        return encounteredNonWhiteSpace;
     }
 
     private boolean isLineBreakCharacter(char currentChar) {

@@ -39,12 +39,13 @@ public class CustomEnterActionHandlerTest {
 
     private Object[][] getTrueCases() {
         return new Object[][]{
-                new Object[]{"{", 1},
-                new Object[]{"{ ", 1},
-                new Object[]{"{}", 1},
-                new Object[]{"{} \n", 1},
-                new Object[]{"{\n} \n   {\n\n", 9},
-                new Object[]{"{\n} \n   { \n\n", 9}
+                new Object[]{"a{", 2},
+                new Object[]{"a{ ", 2},
+                new Object[]{"a{}", 2},
+                new Object[]{"a{} \n", 2},
+                new Object[]{"\n   a {\n} ", 7},
+                new Object[]{"\n\tpublic void a(){\n} ", 18},
+                new Object[]{"\n\t public void a(){\n} ", 19}
         };
     }
 
@@ -52,9 +53,15 @@ public class CustomEnterActionHandlerTest {
         return new Object[][]{
                 new Object[]{"", 0},
                 new Object[]{"{", 0},
+                new Object[]{"{", 1},
+                new Object[]{"{ ", 1},
+                new Object[]{"{}", 1},
+                new Object[]{"{} \n", 1},
                 new Object[]{"{} \n", 2},
                 new Object[]{"{\n} ", 2},
-                new Object[]{"\n   a {\n} ", 7}
+                new Object[]{"{\n} \n   {\n\n", 9},
+                new Object[]{"{\n} \n   { \n\n", 9},
+                new Object[]{"{\n} \n\t  { \n\n", 9}
         };
     }
 }
