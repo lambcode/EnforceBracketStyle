@@ -16,6 +16,13 @@ buildscript {
 apply plugin: 'org.jetbrains.intellij'
 apply plugin: 'java'
 
+repositories {
+  mavenCentral()
+}
+dependencies {
+  testCompile "pl.pragmatists:JUnitParams:1.0.5"
+}
+
 sourceCompatibility = javaVersion
 targetCompatibility = javaVersion
 
@@ -23,11 +30,11 @@ tasks.withType(JavaCompile) { options.encoding = 'UTF-8' }
 
 sourceSets {
   main {
-    java.srcDir 'src'
+    java.srcDir 'src/main'
     resources.srcDir 'resources'
   }
   test {
-    java.srcDir 'test'
+    java.srcDir 'src/test'
   }
 }
 

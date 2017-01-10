@@ -30,7 +30,9 @@ public class EnforceBracketStyleAction extends EditorAction {
 
         @Override
         public void execute(@NotNull Editor editor, @NotNull DataContext context) {
-            if (customEnterActionHandler.shouldFormatBracket(editor)) {
+            int currentOffset = editor.getCaretModel().getCurrentCaret().getOffset();
+            CharSequence charSequence = editor.getDocument().getCharsSequence();
+            if (customEnterActionHandler.shouldFormatBracket(charSequence, currentOffset)) {
                 editor.getCaretModel().moveCaretRelatively(-1, 0  , false, false, false);
                 runAlreadyRegisteredActions(context);
                 editor.getCaretModel().moveCaretRelatively(1, 0  , false, false, false);
