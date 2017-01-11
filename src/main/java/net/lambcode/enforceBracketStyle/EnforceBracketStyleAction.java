@@ -38,8 +38,7 @@ public class EnforceBracketStyleAction extends EditorAction {
     private static class Handler extends EditorActionHandler {
         private final CustomEnterActionHandler customEnterActionHandler;
 
-        public Handler()
-        {
+        public Handler() {
             customEnterActionHandler = new CustomEnterActionHandler();
         }
 
@@ -65,8 +64,7 @@ public class EnforceBracketStyleAction extends EditorAction {
             return file.getFileType() == JavaFileType.INSTANCE;
         }
 
-        private boolean isBraceOnNewlineSettingOn()
-        {
+        private boolean isBraceOnNewlineSettingOn() {
             CommonCodeStyleSettings currentSettings = CodeStyleSettingsManager.getInstance().getCurrentSettings().getCommonSettings(JavaLanguage.INSTANCE);
             return currentSettings.CLASS_BRACE_STYLE == currentSettings.NEXT_LINE && currentSettings.METHOD_BRACE_STYLE == currentSettings.NEXT_LINE;
         }
